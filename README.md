@@ -1,5 +1,6 @@
-#RESULTADO
-![Alt text](ResultadoKarate.png)
+# RESULTADO
+
+![Alt text](./ResultadoKarate.PNG)
 
 # Proyecto base de pruebas automatizadas con Karate, Java y Gradle
 
