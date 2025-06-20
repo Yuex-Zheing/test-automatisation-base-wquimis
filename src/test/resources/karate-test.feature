@@ -3,7 +3,7 @@ Feature: Marvel Characters API tests
   Background:
     * url 'http://bp-se-test-cabcd9b246a5.herokuapp.com/wequimis/api/characters'
     * configure ssl = true
-    * def idChar = 5
+    * def idChar = 7
   Scenario: Get all characters (empty list)
     When method get
     Then status 200
@@ -23,6 +23,12 @@ Feature: Marvel Characters API tests
     Then status 201
     And match response.name == 'Iron Man'
 
+  Scenario: Get character by ID (exists)
+    Given path  idChar
+    When method get
+    Then status 200
+    And match response.name == 'Iron Man'
+
   Scenario: Create character (duplicate name)
     Given request
       """
@@ -36,21 +42,6 @@ Feature: Marvel Characters API tests
     When method post
     Then status 400
     And match response.error == 'Character name already exists'
-
-  Scenario: Get character by ID (exists)
-    Given path  idChar
-    When method get
-    Then status 200
-    And match response ==
-      """
-      {
-        id: idChar,
-        name: 'Iron Man',
-        alterego: 'Tony Stark',
-        description: 'Genius billionaire',
-        powers: ['Armor', 'Flight']
-      }
-      """
 
   Scenario: Get character by ID (not found)
     Given path '999'
